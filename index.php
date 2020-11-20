@@ -30,47 +30,12 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
                 var dato = 0;
-                var dolar;
 
                 $(document).ready(()=>{
-                    $.ajax({
-                        url: "php/actBuscarDolar.php",
-                        method: "POST",
-                        cache: "false",
-                        dataType: "json",
-                        }).done(function(data){
-                            
-                            
-                            dolar = data[0]
-                            $("#dolar").html(`<h2>Precio del Dolar: ${formatNumber(data[0])}<h2><h4>Cambiado el: ${data[1]}<h4>`)
-                                
-                                $.ajax({
-                                url: "php/actBuscar.php",
-                                method: "POST",
-                                data: {x:dato},
-                                cache: "false",
-                                dataType: "json",
-                                }).done(function(data){
                     
-                                    data.forEach(i => {
-                                        var resultado = `
-                                            <div class="producto">
-                                                <h3>${i[1]}</h3>
-                                                Precio en dolares: ${i[2]}
-                                                Precio en Bolivares: ${formatNumber(i[2]*dolar)}
-                                            <div>
-                                        `;
-
-                                        $("#resultado").append(resultado);
-                                    });
-                                        
-                                    
+                    actualizarVista();
                     
-                                    
-                                });
-                            
-                        });
-
+                    
                 })
 
                 function formatNumber(num) {
@@ -88,6 +53,78 @@
                     for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++)
                         num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
                     return (((sign) ? '' : '-') + num + ',' + cents);
+                }
+
+                function actualizarVista(){
+
+                    
+
+                    $.ajax({
+                        url: "php/actBuscarDolar.php",
+                        method: "POST",
+                        cache: "false",
+                        dataType: "json",
+                        }).done(function(data){
+                            
+                            
+                            dolar = data[0]
+                            $("#dolar").html(`<h2>Precio del Dolar: ${formatNumber(data[0])}<h2><h4>Cambiado el: ${data[1]}<h4><button id="cambio">Cambiar</button>`)
+                                
+
+                            $("#cambio").click(()=>{
+                        
+                                $("#dolar").html(`Nuevo precio del dolar: <input type="number" id="Nprecio"><br /><button id="cambio">Cambiar</button>`);
+                                $("#cambio").click(()=>{
+
+                                    var precio = $("#Nprecio").val();
+                                    var hoy = new Date();
+                                    var fecha = hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate();
+                                    var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+                                    var fechaHora = fecha + ' ' + hora;
+                                    $.ajax({
+                                        url: "php/actualizarDolar.php",
+                                        method: "POST",
+                                        data: {precio:precio,
+                                                fechaHora:fechaHora},
+                                        cache: "false",
+                                        dataType: "json",
+                                        }).done(function(data){
+                            
+                                            actualizarVista();
+                                            
+                                        });
+
+
+                                });
+
+                            });
+
+                                $.ajax({
+                                url: "php/actBuscar.php",
+                                method: "POST",
+                                data: {x:dato},
+                                cache: "false",
+                                dataType: "json",
+                                }).done(function(data){
+                                    
+                                    $("#resultado").html("");
+                                    
+                                    data.forEach(i => {
+                                        var resultado = `
+                                            <div class="producto">
+                                                <h3>${i[1]}</h3>
+                                                Precio en dolares: ${i[2]}
+                                                Precio en Bolivares: ${formatNumber(i[2]*i[3])}
+                                            </div>
+                                        `;
+                                        
+                                        $("#resultado").append(resultado);
+                                    });
+                                        
+                                    
+                                });
+                            
+                        });
                 }
                 
             </script>  
