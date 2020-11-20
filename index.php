@@ -11,6 +11,8 @@
                     width: 40%;
                     margin: auto;
                     margin-bottom: 1px;
+                    text-align: center;
+                    padding: 15px;
                 }
                 h1{
                     text-align: center;
