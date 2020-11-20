@@ -11,6 +11,8 @@
                     width: 40%;
                     margin: auto;
                     margin-bottom: 1px;
+                    text-align: center;
+                    padding: 15px;
                 }
                 h1{
                     text-align: center;
@@ -56,7 +58,7 @@
                                         var resultado = `
                                             <div class="producto">
                                                 <h3>${i[1]}</h3>
-                                                Precio en dolares: ${i[2]}
+                                                Precio en dolares: ${i[2]}<br />
                                                 Precio en Bolivares: ${formatNumber(i[2]*dolar)}
                                             <div>
                                         `;
