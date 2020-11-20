@@ -7,10 +7,10 @@ class DB{
     private $charset;
 
     public function __construct(){
-        $this->host     = 'localhost';
-        $this->db       = 'rie';
-        $this->user     = 'root';
-        $this->password = '';
+        $this->host     = 'bkhsiuslmvy4jgqcs38t-mysql.services.clever-cloud.com';
+        $this->db       = 'bkhsiuslmvy4jgqcs38t';
+        $this->user     = 'uxspqgdkmodcl9rl';
+        $this->password = 'lAawZbgyS9KakLgnE0BP';
         $this->charset  = 'utf8mb4';
     }
 
