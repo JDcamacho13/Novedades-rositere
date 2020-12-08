@@ -1,134 +1,34 @@
 <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Novedades Rositere</title>
-            <style>
-                .producto{
-                    border: solid black 1px;                    
-                    background-color: #eeeeee;
-                    width: 40%;
-                    margin: auto;
-                    margin-bottom: 1px;
-                    text-align: center;
-                    padding: 15px;
-                }
-                h1{
-                    text-align: center;
-                }
-                h3{
-                    text-align: center;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Novedades Rositere</h1>
-            
-            <div id="dolar">
-                <h2>Precio del Dolar: Cargando....</h2>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>Novedades Rositere</title>
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet/less" type="text/css" href="css/style.less">
+    </head>
+    <body>
+        <header>
+            <div class="wrapper">
+                <div class="logo">Novedades Rositere</div>
+                <nav>
+                    <center><a href="login.php">Ingresar</a></center>
+                </nav>
             </div>
-            <div id="resultado"></div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script>
-                var dato = 0;
+        </header>
+        <div class="container-dolar">
+            <div id="dolar">
+                Precio del Dolar: Cargando....
+            </div>
+        </div>
+        
+        
+        
 
-                $(document).ready(()=>{
-                    
-                    actualizarVista();
-                    
-                    
-                })
-
-                function formatNumber(num) {
-                    if (!num || num == 'NaN') return '-';
-                    if (num == 'Infinity') return '&#x221e;';
-                    num = num.toString().replace(/\$|\,/g, '');
-                    if (isNaN(num))
-                        num = "0";
-                    sign = (num == (num = Math.abs(num)));
-                    num = Math.floor(num * 100 + 0.50000000001);
-                    cents = num % 100;
-                    num = Math.floor(num / 100).toString();
-                    if (cents < 10)
-                        cents = "0" + cents;
-                    for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++)
-                        num = num.substring(0, num.length - (4 * i + 3)) + '.' + num.substring(num.length - (4 * i + 3));
-                    return (((sign) ? '' : '-') + num + ',' + cents);
-                }
-
-                function actualizarVista(){
-
-                    
-
-                    $.ajax({
-                        url: "php/actBuscarDolar.php",
-                        method: "POST",
-                        cache: "false",
-                        dataType: "json",
-                        }).done(function(data){
-                            
-                            
-                            dolar = data[0]
-                            $("#dolar").html(`<h2>Precio del Dolar: ${formatNumber(data[0])}<h2><h4>Cambiado el: ${data[1]}<h4><button id="cambio">Cambiar</button>`)
-                                
-
-                            $("#cambio").click(()=>{
-                        
-                                $("#dolar").html(`Nuevo precio del dolar: <input type="number" id="Nprecio"><br /><button id="cambio">Cambiar</button>`);
-                                $("#cambio").click(()=>{
-
-                                    var precio = $("#Nprecio").val();
-                                    var hoy = new Date();
-                                    var fecha = hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate();
-                                    var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
-                                    var fechaHora = fecha + ' ' + hora;
-                                    $.ajax({
-                                        url: "php/actualizarDolar.php",
-                                        method: "POST",
-                                        data: {precio:precio,
-                                                fechaHora:fechaHora},
-                                        cache: "false",
-                                        dataType: "json",
-                                        }).done(function(data){
-                            
-                                            actualizarVista();
-                                            
-                                        });
-
-
-                                });
-
-                            });
-
-                                $.ajax({
-                                url: "php/actBuscar.php",
-                                method: "POST",
-                                data: {x:dato},
-                                cache: "false",
-                                dataType: "json",
-                                }).done(function(data){
-                                    
-                                    $("#resultado").html("");
-                                    
-                                    data.forEach(i => {
-                                        var resultado = `
-                                            <div class="producto">
-                                                <h3>${i[1]}</h3>
-                                                Precio en dolares: ${i[2]}<br />
-                                                Precio en Bolivares: ${formatNumber(i[2]*i[3])}
-                                            </div>
-                                        `;
-                                        
-                                        $("#resultado").append(resultado);
-                                    });
-                                        
-                                    
-                                });
-                            
-                        });
-                }
-                
-            </script>  
-        </body>
-        </html>
+        <div id="resultado" class="cards"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="./js/diseño.js"></script> 
+        <script src="./js/actualizarVista.js"></script> 
+        <script src="./js/less.js"></script>
+    </body>
+</html>
