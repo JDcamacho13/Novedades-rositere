@@ -2,42 +2,93 @@
 include_once 'dataBase.php';
 include_once 'userSession.php';
 
-function login($usuario, $password)
-	{
+$Sesion = new UserSession;
 
-		$DB = new DB();
+function login($usuario, $password){
 
-		global $Sesion;
+	$DB = new DB();
 
-		$sql = "SELECT id,activacion,`password`,usuario,permisos,datos_registrados FROM usuarios WHERE usuario = '$usuario' || correo = '$usuario'";
-		$query = $DB->connect()->query($sql);
+	global $Sesion;
 
-		if($query->rowCount() > 0){
-			foreach( $query as $row){
-				if($row['activacion'] == 1){
-					
-					$validaPassw = password_verify($password, $row['password']);
+	$sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
+	$query = $DB->connect()->query($sql);
 
-					if($validaPassw){
+	if($query->rowCount() > 0){
+		foreach( $query as $row){
+			
+				
+			$validaPassw = password_verify($password, $row['password']);
 
-						lastSession($row['id']);
-						$Sesion->setCurrentUser($row['usuario'],$row['permisos'],$row['id'],$row['datos_registrados']);
+			if($validaPassw){
 
-					}else{
-						$errors = "La contraseña es incorrecta";
-						return $errors;
-					}
+				$Sesion->setCurrentUser($row['usuario'],$row['permisos'],$row['id']);
 
-				}else{
-					$errors = 'El usuario no esta activo';
-					return $errors;
-				}
+			}else{
+				$errors = "La contraseña es incorrecta";
+				return $errors;
 			}
-		}else{
-			$errors = "El nombre de usuario o correo electrónico no existe";
-			return $errors;
+
+			
 		}
+	}else{
+		$errors = "El nombre de usuario o correo electrónico no existe";
+		return $errors;
+	}
 
 		
-    }
+}
+
+
+function registro($nombre, $apellido, $usuario, $password){
+	$DB = new DB();
+		
+		try{
+			$query = $DB->connect()->query("INSERT INTO `usuarios` ( `nombre`,`apellido`,`usuario`, `password`,
+			`permisos`) VALUES ('$nombre', '$apellido', '$usuario', '$password', 0)");
+
+			return true;
+		}catch(exeption $e){
+
+			return false;
+		}
+}
+
+function usuarioExiste($usuario){
+	$DB = new DB();
+
+	$sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
+	$query = $DB->connect()->query($sql);
+
+	if($query->rowCount() > 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+function hashPassword($password){
+	$hash = password_hash($password, PASSWORD_DEFAULT);
+	return $hash;
+}
+
+function resultBlock($errors){
+
+	$resultado;
+
+	if(count($errors) > 0)
+	{
+		$resultado = "<div id='error' class='alert alert-danger error' role='alert'><center>
+		<h2>Error</h2><ul class='list'>";
+		foreach($errors as $error)
+		{
+			$resultado .= "<li>".$error."</li>";
+		}
+		$resultado .= "</ul>";
+		$resultado .= "</center></div>";
+
+		return $resultado;
+	}
+}
+
 ?>

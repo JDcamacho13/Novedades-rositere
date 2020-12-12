@@ -1,19 +1,25 @@
 $(document).ready(function(){
 
+    var nombre;
+    var apellido;
     var usuario;
     var password;
 
-  
     $('#submit').on('click', function(e){
 
         e.preventDefault();
+
+        nombre = $("#nombre").val();
+        apellido = $("#apellido").val();
         usuario = $("#usuario").val();
         password = $("#password").val();
 
         $.ajax({
-            url: "php/actLogin.php",
+            url: "php/actRegister.php",
             method: "POST",
-            data: {usuario:usuario,
+            data: {nombre:nombre,
+                    apellido:apellido,
+                    usuario:usuario,
                     password:password},
             cache: "false",
             dataType: "json",
@@ -23,7 +29,7 @@ $(document).ready(function(){
 
                 if(data == 0){
                     if(data == 0){
-                        $(location).attr('href','index.php');
+                        $(location).attr('href','login.php');
                     }
                     
                 }else{
