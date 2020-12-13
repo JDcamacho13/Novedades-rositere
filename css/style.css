@@ -110,7 +110,6 @@ header nav span:hover {
 	position: fixed;
 	top: 0;
 	right: -40%;
-	display: flex;
 	transition: right 0.4s;
 	z-index: 20;
 }
@@ -127,6 +126,58 @@ header nav span:hover {
 	justify-content: center;
 }
 
+.options-menu ul{
+	text-align: center;
+	padding: 0;
+}
+
+.options-menu ul li{
+	
+	text-decoration: none;
+	list-style: none;
+	padding: 7.5px;
+	transition: all 0.2s;
+}
+.options-menu ul li:hover, .options-menu ul li:active{
+	
+	background-color: #f56f3a;
+
+}
+
 .options-menu ul a{
 	text-decoration: none;
+	text-align: center;
+	color: white;
+	display: block;
+}
+
+.info-usuario{
+	width: fit-content;
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+.info-usuario h2{
+	text-align: center;
+	color: white;
+}
+
+.info-usuario p{
+	text-align: center;
+	color: rgb(187, 187, 187);
+	margin-top: -19px;
+}
+
+#exit{
+	transition: all 0.4s;
+}
+
+#exit:hover, #exit:active{
+	background:#f56f3a;
+	border-radius:50px;
+}
+
+#permiso{
+	display: none;
 }

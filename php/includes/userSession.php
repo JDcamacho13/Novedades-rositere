@@ -9,10 +9,13 @@ class UserSession{
         } 
     }
 
-    public function setCurrentUser($user,$permisos,$id){
+    public function setCurrentUser($user,$permisos,$id,$nombre,$apellido){
         $_SESSION['usuario'] = $user;
         $_SESSION['permisos'] = $permisos;
         $_SESSION['InumeroD'] = $id;
+        $_SESSION['nombre'] = $nombre;
+        $_SESSION['apellido'] = $apellido;
+
     }
 
     public function getCurrentUser(){

@@ -21,7 +21,7 @@ function login($usuario, $password){
 
 			if($validaPassw){
 
-				$Sesion->setCurrentUser($row['usuario'],$row['permisos'],$row['id']);
+				$Sesion->setCurrentUser($row['usuario'],$row['permisos'],$row['id'],$row['nombre'],$row['apellido']);
 
 			}else{
 				$errors = "La contraseña es incorrecta";

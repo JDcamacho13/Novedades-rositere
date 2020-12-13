@@ -19,6 +19,7 @@ if(isset($_SESSION['usuario'])){
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
+        <input type="text" name="permiso" id="permiso" value="<?php echo($_SESSION['permisos'])?>">
         <header>
             <div class="wrapper">
                 <div class="logo">Novedades Rositere</div>
@@ -50,10 +51,26 @@ if(isset($_SESSION['usuario'])){
 
         <div class="right-panel" id="menu">
             <div class="exit"><span style="font-size: 25px;cursor:pointer" id="exit"><i class="fas fa-arrow-right"></span></i></div>
-            <div class="info-usuario"></div>
+            <div class="info-usuario">
+                    <h2><?php echo($_SESSION['nombre']. " " . $_SESSION['apellido'])?></h2>
+                    <?php 
+                        if($_SESSION['permisos'] == 1){
+                            echo("<p>Administrador</p>");
+                        }
+                    ?>
+            </div>
             <div class="options-menu">
                 <ul>
-                    <a href="./php/logout.php">Cerrar Sesión</a>
+                    
+                    <li><a href="./index.php">Inicio</a></li>
+
+                    <?php 
+                        if($_SESSION['permisos'] == 1){
+                            echo("<li><a href='./agregar.php'>Agregar nuevo producto</a></li>");
+                        }
+                    ?>
+
+                    <li><a href="./php/logout.php">Cerrar Sesión</a></li>
                     
                 </ul>
             </div>

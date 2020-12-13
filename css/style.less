@@ -32,15 +32,31 @@ a.btn {
 	transition: all 0.1s 0s ease-out;
 }
 
-.no-touch a.btn:hover {
+
+input.btn {
+  background: @teal;
+  border-radius: 4px;
+	box-shadow: 0 2px 0px 0 rgba(0,0,0,0.25);
+  color: @white;
+  display: inline-block;
+  padding: 6px 30px 8px;
+  position: relative;
+  text-decoration: none;
+  border: 0;
+  font-size: large;
+  transition: all 0.1s 0s ease-out;
+  cursor: pointer;
+}
+
+.no-touch input.btn:hover {
   background: lighten(@teal,2.5);
   box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
   transform: translateY(-2px);
   transition: all 0.25s 0s ease-out;
 }
 
-.no-touch a.btn:active,
-a.btn:active {
+.no-touch input.btn:active,
+input.btn:active {
   background: darken(@teal,2.5);
   box-shadow: 0 1px 0px 0 rgba(255,255,255,0.25);
   transform: translate3d(0,1px,0);
@@ -159,7 +175,6 @@ div.card {
 
 div.cards.showing {
   div.card {
-    cursor: pointer;
     opacity: 0.6;
     transform: scale(0.88);
   }
@@ -193,6 +208,7 @@ div.card.show {
   div.card-flap {
     background: @white;
     transform: rotateX(0deg);
+    box-shadow: -1px 13px 21px -5px rgba(0, 0, 0, 0.7);
   }
   div.flap1 {
     transition: all 0.3s 0s ease-out;

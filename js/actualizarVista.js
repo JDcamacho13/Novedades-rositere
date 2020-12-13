@@ -1,8 +1,10 @@
 var dato = 0;
+var permisos = 0;
 
 $(document).ready(()=>{
     
-    actualizarVista();
+    permisos = $("#permiso").val();
+    actualizarVista(permisos);
     
 })
 
@@ -23,7 +25,7 @@ function formatNumber(num) {
     return (((sign) ? '' : '-') + num + ',' + cents);
 }
 
-function actualizarVista(){
+function actualizarVista(permisos){
 
     
 
@@ -78,11 +80,21 @@ function actualizarVista(){
                     $("#resultado").html("");
                     
                     data.forEach(i => {
-                        var resultado = `
+
+                        if(i[4] == 0){
+                            var imagen = "https://source.unsplash.com/400x300/?wave";
+                        }else{
+                            var imagen = i[4];
+                        }
+                        
+                        var resultado;
+
+                        if(permisos==1){
+                            resultado = `
                             
                                 <div class="card">
                                 <div class="card__image-holder">
-                                <img class="card__image" src="https://source.unsplash.com/400x300/?wave" alt="wave" />
+                                <img class="card__image" src="${imagen}" alt="wave" />
                                 </div>
                                 <div class="card-title">
                                 <a href="#" class="toggle-info btn">
@@ -97,16 +109,36 @@ function actualizarVista(){
                                 </div>
                                 <div class="card-flap flap1">
                                 <div class="card-description">
-                                    This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+                                    <p>Cambiar Nombre: <input type="text" id="nombre-${i[0]}" class="nuevoNombre"></p>
+                                    <p>Cambiar Precio $: <input type="text" id="precio-${i[0]} class="nuevoPrecio""></p>
                                 </div>
                                 <div class="card-flap flap2">
                                     <div class="card-actions">
-                                    <a href="#" class="btn">Read more</a>
+                                    <input type="button" class="btn" value="Editar" data-id="${i[0]}>
                                     </div>
                                 </div>
                                 </div>
                         </div>
                         `;
+                        }else{
+                            resultado = `
+                            
+                                <div class="card">
+                                <div class="card__image-holder">
+                                <img class="card__image" src="${imagen}" alt="wave" />
+                                </div>
+                                <div class="card-title">
+                                <h2>
+                                    ${i[1]}
+                                    <small>Precio en dolares: ${i[2]} $<br /></small>
+                                    <small>Precio en Bolivares: ${formatNumber(i[2]*i[3])} Bs.S</small>
+                                </h2>
+                                </div>
+                                </div>
+                        </div>
+                        `;
+                        }
+                        
                         
                         $("#resultado").append(resultado);
                         
