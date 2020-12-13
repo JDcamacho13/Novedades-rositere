@@ -114,7 +114,7 @@ function actualizarVista(permisos){
                                 </div>
                                 <div class="card-flap flap2">
                                     <div class="card-actions">
-                                    <input type="button" class="btn" value="Editar" data-id="${i[0]}>
+                                        <input type="button" class="btn" value="Editar" data-id="${i[0]}" />
                                     </div>
                                 </div>
                                 </div>
