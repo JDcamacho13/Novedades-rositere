@@ -3,23 +3,29 @@
 include "includes/funcs.php";
 
 if(!productoExiste($_POST['nombre'])){
-    if (($_FILES["file"]["type"] == "image/pjpeg")
-        || ($_FILES["file"]["type"] == "image/jpeg")
-        || ($_FILES["file"]["type"] == "image/png")
-        || ($_FILES["file"]["type"] == "image/gif")
-        || ($_FILES["file"]["type"] == "image/jpg")){
-            if(agregarProducto($_POST['nombre'], $_POST['precio'], "images/".$_FILES['file']['name'])){
-                if (move_uploaded_file($_FILES["file"]["tmp_name"], "../images/".$_FILES['file']['name'])){
-                
-                    echo 1;
-                }else{
-                    echo 3;
-                }
-            }
-    }else{
-        echo 0;
-    }
-}else{
-    echo 2;
+  $filename= $_FILES['file']['tmp_name'];
+  $client_id = "1a092a11d840461"; // AQUI SU CLIENT ID
+  $handle = fopen($filename, "r");
+  $data = fread($handle, filesize($filename));
+  $pvars   = array('image' => base64_encode($data));
+  $timeout = 30;
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+  curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_id));
+  curl_setopt($curl, CURLOPT_POST, 1);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $pvars);
+  $out = curl_exec($curl);
+  curl_close ($curl);
+  $pms = json_decode($out,true);
+  $url=$pms['data']['link'];
+  if($url!=""){
+   if(agregarProducto($_POST['nombre'], $_POST['precio'], $url)){
+       echo 1;
+   }
+  }else{
+   echo 0;
+  } 
 }
     
