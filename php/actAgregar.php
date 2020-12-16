@@ -13,7 +13,7 @@ if(!productoExiste($_POST['nombre'])){
                 
                     echo 1;
                 }else{
-                    echo 0;
+                    echo 3;
                 }
             }
     }else{
