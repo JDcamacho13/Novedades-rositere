@@ -26,6 +26,9 @@ $(document).ready(function() {
                 if(data == 2){
                     alert('Ya existe un producto con ese nombre');
                 }
+                if(data == 3){
+                    alert('error a subir la imagen');
+                }
             }
         });
         return false;
