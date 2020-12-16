@@ -8,7 +8,7 @@ if(!productoExiste($_POST['nombre'])){
   $handle = fopen($filename, "r");
   $data = fread($handle, filesize($filename));
   $pvars   = array('image' => base64_encode($data));
-  $timeout = 30;
+  $timeout = 300;
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
   curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
