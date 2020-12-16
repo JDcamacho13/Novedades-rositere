@@ -1,0 +1,95 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body{
+    min-height: 800px;
+}
+
+h2{
+    font-family: "roboto";
+    font-weight: bold;
+}
+.login-page {
+  width: 60%;
+  padding: 8% 0 0;
+  margin: auto;
+  margin-top: 2px;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 425px;
+  margin: 0 auto;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form input[type="submit"] {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #f39c12;
+  width: 100%;
+  border: 0;
+  border-radius: 30px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 20px;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+  cursor: pointer;
+}
+.form input[type="submit"]:hover,.form input[type="submit"]:active,.form input[type="submit"]:focus {
+  background: #f1c40f;
+}
+
+p{
+    font-size: 1.2rem;
+    color: #242424;
+}
+
+p a{
+    color: rgb(255, 171, 44);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+	.login-page{
+    width: 95%;
+  }
+
+  .login-page form{
+    width: 95%;
+  }
+}
+
+.error{
+  max-width: 320px;
+  margin-top: 25px;
+  margin: auto; 
+  text-align: center;
+  background: linear-gradient(to bottom left, #ef8d9c 40%, #ffc39e 100%);
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(107, 107, 107, 0.288);
+  color:#FCFCFC;
+  padding: 10px;
+}
+
+.error .list{
+  font-size: 18px;
+  padding-left: 0;
+  list-style: none;
+  font-family: "roboto";
+}

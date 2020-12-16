@@ -5,9 +5,15 @@ $user = new UserSession();
 
 if(isset($_SESSION['usuario'])){
     $nombre=$user->getCurrentUser();
-}
+    if($_SESSION['permisos'] == 0){
+        $nombre=$user->getCurrentUser();
+        
+        header("Location: ./index.php");
+    
+    }else{
 
-?>
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,6 +22,7 @@ if(isset($_SESSION['usuario'])){
         <title>Novedades Rositere</title>
         <link href="css/style.css" rel='stylesheet' type='text/css' />
         <link rel="stylesheet/less" type="text/css" href="css/style.less">
+        <link rel="stylesheet" type="text/css" href="css/agregar.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
@@ -29,7 +36,7 @@ if(isset($_SESSION['usuario'])){
 
                     if(!isset($_SESSION['usuario'])){
                     ?>
-                        <a href="login.php">Ingresar</a>
+                        <span><a href="login.php">Ingresar</a></span>
                     <?php
                     }else{
                         ?>
@@ -47,7 +54,20 @@ if(isset($_SESSION['usuario'])){
             </div>
         </div>
        
-        <div id="resultado" class="cards"></div>
+        <!-- Agregar los productos -->
+        
+        <div id="errores"></div>
+        <div class="login-page" id="login-page">
+            <div class="form">
+                <h2>Agregar Nuevo Producto</h2>
+                <form class="register-form" id="form" autocomplete="off">
+                    <input type="text" id="nombre" placeholder="Nombre del Producto"/>
+                    <input type="text" id="precio" placeholder="Precio en Dólares"/>
+                    Foto del Producto<input type="file" name="image" id="image">
+                    <input type="submit" id="submit" value="Enviar"> <br />
+                </form>
+            </div>
+        </div>
 
         <div class="right-panel" id="menu">
             <div class="exit"><span style="font-size: 25px;cursor:pointer" id="exit"><i class="fas fa-arrow-right"></span></i></div>
@@ -77,9 +97,19 @@ if(isset($_SESSION['usuario'])){
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="./js/diseño.js"></script> 
-        <script src="./js/actualizarVista.js"></script> 
-        <script src="./js/menu.js"></script> 
-        <script src="./js/less.js"></script>
+        <script src="./js/menu.js"></script>
+        <script src="./js/actualizarDolar.js"></script>
+        <script src="./js/agregar.js"></script>
     </body>
 </html>
+
+
+    
+    <?php
+
+}}else{
+    
+    header("Location: ./index.php");
+}
+
+?>

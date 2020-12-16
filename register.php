@@ -12,11 +12,12 @@
             <div class="form">
                 <h2>Registro</h2>
                 <form class="register-form" id="form">
-                <input type="text" id="nombre" placeholder="Nombre"/>
-                <input type="text" id="apellido" placeholder="Apellido"/>
-                <input type="text" id="usuario" placeholder="Nombre de Usuario"/>
-                <input type="password" id="password" placeholder="Clave"/>
-                <input type="submit" id="submit" value="Enviar"> <br />
+                    <input type="text" id="nombre" placeholder="Nombre"/>
+                    <input type="text" id="apellido" placeholder="Apellido"/>
+                    <input type="text" id="usuario" placeholder="Nombre de Usuario"/>
+                    <input type="password" id="password" placeholder="Clave"/>
+                    <input type="submit" id="submit" value="Enviar"> <br />
+                </form>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

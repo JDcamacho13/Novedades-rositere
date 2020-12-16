@@ -38,7 +38,12 @@ function actualizarVista(permisos){
             
             
             dolar = data[0]
-            $("#dolar").html(`Precio del Dolar: ${formatNumber(data[0])}Cambiado el: ${data[1]}<button id="cambio">Cambiar</button>`)
+            if(permisos==1){
+                $("#dolar").html(`Precio del Dolar: ${formatNumber(data[0])}<br />Cambiado el: ${data[1]}<button id="cambio">Cambiar</button>`)
+            }else{
+                $("#dolar").html(`Precio del Dolar: ${formatNumber(data[0])}`)
+            }
+            
                 
 
             $("#cambio").click(()=>{
@@ -94,7 +99,7 @@ function actualizarVista(permisos){
                             
                                 <div class="card">
                                 <div class="card__image-holder">
-                                <img class="card__image" src="${imagen}" alt="wave" />
+                                <img class="card__image" src="${imagen}" alt="wave" style="max-height: 300px"/>
                                 </div>
                                 <div class="card-title">
                                 <a href="#" class="toggle-info btn">

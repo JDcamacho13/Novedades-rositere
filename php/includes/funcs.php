@@ -91,4 +91,33 @@ function resultBlock($errors){
 	}
 }
 
+function productoExiste($nombre){
+	$DB = new DB();
+
+	$sql = "SELECT * FROM productos WHERE nombre = '$nombre'";
+	$query = $DB->connect()->query($sql);
+
+	if($query->rowCount() > 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+function agregarProducto($nombre, $precio, $rutaFoto){
+	$DB = new DB();
+		
+		try{
+			$query = $DB->connect()->query("INSERT INTO `productos` ( `nombre`,`precio_dolares`,`foto`) 
+			VALUES ('$nombre', '$precio', '$rutaFoto')");
+
+			return true;
+		}catch(exeption $e){
+
+			return false;
+		}
+}
+
 ?>

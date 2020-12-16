@@ -25,10 +25,11 @@ if(isset($_SESSION['usuario'])){
             <div class="form">
                 <h2>Iniciar Sesión</h2>
                 <form class="register-form" id="form">
-                <input type="text" id="usuario" placeholder="Nombre de Usuario"/>
-                <input type="password" id="password" placeholder="Clave"/>
-                <input type="submit" id="submit" value="Enviar"> <br />
-                <p>¿No tienes una cuenta? Registrate <a href="register.php">AQUÍ</a></p>
+                    <input type="text" id="usuario" placeholder="Nombre de Usuario"/>
+                    <input type="password" id="password" placeholder="Clave"/>
+                    <input type="submit" id="submit" value="Enviar"> <br />
+                    <p>¿No tienes una cuenta? Registrate <a href="register.php">AQUÍ</a></p>
+                </form>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
