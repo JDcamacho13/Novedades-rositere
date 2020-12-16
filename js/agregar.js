@@ -21,14 +21,9 @@ $(document).ready(function() {
                     alert("todo perfecto");
                 } 
                 if(data == 0) {
-                    alert('Formato de imagen incorrecto.');
+                    alert('Error');
                 }
-                if(data == 2){
-                    alert('Ya existe un producto con ese nombre');
-                }
-                if(data == 3){
-                    alert('error a subir la imagen');
-                }
+           
             }
         });
         return false;
