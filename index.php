@@ -16,6 +16,7 @@ if(isset($_SESSION['usuario'])){
         <title>Novedades Rositere</title>
         <link href="css/style.css" rel='stylesheet' type='text/css' />
         <link rel="stylesheet/less" type="text/css" href="css/style.less">
+        <link rel="icon" href="./images/tienda-online.png">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>
@@ -33,7 +34,7 @@ if(isset($_SESSION['usuario'])){
                     <?php
                     }else{
                         ?>
-                        <span class="usuario"><?php echo $nombre?></span>
+                        <span class="usuario"><i class="fas fa-bars" style="color: white;"></i></span>
                         <?php
                     }
                 ?>
@@ -78,6 +79,7 @@ if(isset($_SESSION['usuario'])){
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./js/diseño.js"></script> 
+        <script src="./js/editar.js"></script> 
         <script src="./js/actualizarVista.js"></script> 
         <script src="./js/menu.js"></script> 
         <script src="./js/less.js"></script>

@@ -18,6 +18,7 @@ if(isset($_SESSION['usuario'])){
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Novedades Rositere</title>
         <link href="css/style-login.css" rel='stylesheet' type='text/css' />
+        <link rel="icon" href="./images/tienda-online.png">
     </head>
     <body>
         <div id="errores"></div>

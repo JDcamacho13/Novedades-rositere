@@ -120,4 +120,36 @@ function agregarProducto($nombre, $precio, $rutaFoto){
 		}
 }
 
+function editarNombreP($id, $nombre){
+	$DB = new DB();
+		
+	if(!productoExiste($nombre)){
+		try{
+			$query = $DB->connect()->query("UPDATE productos
+			SET nombre = '$nombre' WHERE id = $id;");
+
+			return true;
+		}catch(exeption $e){
+
+			return false;
+		}	
+	}else{
+		return false;
+	}
+		
+}
+
+function editarPrecioP($id, $precio){
+	$DB = new DB();
+		
+		try{
+			$query = $DB->connect()->query("UPDATE productos
+			SET precio_dolares = '$precio' WHERE id = $id;");
+
+			return true;
+		}catch(exeption $e){
+
+			return false;
+		}
+}
 ?>

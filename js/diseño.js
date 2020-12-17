@@ -5,12 +5,15 @@ $(document).ready(function(){
   function diseño(){
     var zindex = 10;
     
-    $("div.card").click(function(e){
+    $("a.toggle-info").click(function(e){
       e.preventDefault();
-  
+     
       var isShowing = false;
+
+      console.log($(this).parents("div.card").hasClass("show"));
   
-      if ($(this).hasClass("show")) {
+      if ($(this).parents("div.card").hasClass("show")) {
+        
         isShowing = true
       }
   
@@ -25,7 +28,7 @@ $(document).ready(function(){
             .removeClass("showing");
         } else {
           // this card isn't showing - get in with it
-          $(this)
+          $(this).parents("div.card")
             .css({zIndex: zindex})
             .addClass("show");
   
@@ -37,7 +40,7 @@ $(document).ready(function(){
         // no cards in view
         $("div.cards")
           .addClass("showing");
-        $(this)
+        $(this).parents("div.card")
           .css({zIndex:zindex})
           .addClass("show");
   

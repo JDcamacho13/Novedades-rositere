@@ -99,10 +99,10 @@ function actualizarVista(permisos){
                             
                                 <div class="card">
                                 <div class="card__image-holder">
-                                <img class="card__image" src="${imagen}" alt="wave" style="max-height: 300px"/>
+                                <img class="card__image" src="${imagen}" alt="wave" width="400" height="300"/>
                                 </div>
                                 <div class="card-title">
-                                <a href="#" class="toggle-info btn">
+                                <a class="toggle-info btn">
                                     <span class="left"></span>
                                     <span class="right"></span>
                                 </a>
@@ -115,11 +115,11 @@ function actualizarVista(permisos){
                                 <div class="card-flap flap1">
                                 <div class="card-description">
                                     <p>Cambiar Nombre: <input type="text" id="nombre-${i[0]}" class="nuevoNombre"></p>
-                                    <p>Cambiar Precio $: <input type="text" id="precio-${i[0]} class="nuevoPrecio""></p>
+                                    <p>Cambiar Precio $: <input type="text" id="precio-${i[0]}" class="nuevoPrecio""></p>
                                 </div>
                                 <div class="card-flap flap2">
                                     <div class="card-actions">
-                                        <input type="button" class="btn" value="Editar" data-id="${i[0]}" />
+                                        <input type="button" class="btn btn-editar" value="Editar" data-id="${i[0]}" />
                                     </div>
                                 </div>
                                 </div>
@@ -130,7 +130,7 @@ function actualizarVista(permisos){
                             
                                 <div class="card">
                                 <div class="card__image-holder">
-                                <img class="card__image" src="${imagen}" alt="wave" />
+                                <img class="card__image" src="${imagen}" alt="wave" width="400" height="300"/>
                                 </div>
                                 <div class="card-title">
                                 <h2>
@@ -148,11 +148,108 @@ function actualizarVista(permisos){
                         $("#resultado").append(resultado);
                         
                     });
-
+                    editar(permisos);
                     diseño();
                         
                     
                 });
             
         });
+}
+
+
+
+function editar(permisos){
+
+    $('.btn-editar').on('click', function(e){
+
+        e.preventDefault();
+        var id = $(this).data("id");
+        var nombre = $(`#nombre-${id}`).val();
+        var precio = $(`#precio-${id}`).val();
+        var boton = $(this);
+
+        var data = {
+            id:id,
+            nombre:nombre,
+            precio:precio,
+        }
+
+        $.ajax({
+            url: "php/actEditar.php",
+            method: "POST",
+            data: data,
+            cache: "false",
+            dataType: "json",
+            beforeSend:function(){
+                boton.val("Conectando...");
+            }}).done(function(data){
+
+                boton.val("Editar");
+                
+
+                if(data[0] == 0){
+                    
+                    alert("No se edito el producto, Ingrese los nuevos datos")
+                    
+                }else{ 
+
+                    var zindex = 10;
+
+                    e.preventDefault();
+     
+                    var isShowing = false;
+                
+                    if (boton.parents("div.card").hasClass("show")) {
+                        
+                        isShowing = true
+                    }
+                
+                    if ($("div.cards").hasClass("showing")) {
+                        // a card is already in view
+                        $("div.card.show")
+                        .removeClass("show");
+                
+                        if (isShowing) {
+                        // this card was showing - reset the grid
+                        $("div.cards")
+                            .removeClass("showing");
+                        } else {
+                        // this card isn't showing - get in with it
+                        boton.parents("div.card")
+                            .css({zIndex: zindex})
+                            .addClass("show");
+                
+                        }
+                
+                        zindex++;
+                
+                    } else {
+                        // no cards in view
+                        $("div.cards")
+                        .addClass("showing");
+                        boton.parents("div.card")
+                        .css({zIndex:zindex})
+                        .addClass("show");
+                
+                        zindex++;
+                    }
+
+                    var text = "";
+
+                    for (var i = 1; i < data.length; i+=1) {
+                        text += data[i];
+                        text += "\n"; 
+                    }
+
+                    alert(text);
+                    actualizarVista(permisos);
+
+                }
+                    
+                
+
+                
+            });
+    });
 }

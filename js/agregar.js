@@ -16,16 +16,22 @@ $(document).ready(function() {
             data: formData,
             contentType: false,
             processData: false,
-            success: function(data) {
+            beforeSend:function(){
+                $('#submit').val("Subiendo...");
+            }}).done(function(data) {
+
+                $('#submit').val("Enviar");
+
                 if (data == 1) {
                     alert("todo perfecto");
                 } 
                 if(data == 0) {
                     alert('Error');
                 }
-           
-            }
+                
+                
+            })
         });
-        return false;
-    });
+        
 });
+

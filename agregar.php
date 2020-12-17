@@ -23,6 +23,7 @@ if(isset($_SESSION['usuario'])){
         <link href="css/style.css" rel='stylesheet' type='text/css' />
         <link rel="stylesheet/less" type="text/css" href="css/style.less">
         <link rel="stylesheet" type="text/css" href="css/agregar.css">
+        <link rel="icon" href="./images/tienda-online.png">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     </head>
     <body>

@@ -6,5 +6,5 @@
 
     $userSession->closeSession();
 
-    header("Location: http://".$_SERVER['SERVER_NAME']."/novedades-rositere/index.php");
+    header("Location: http://".$_SERVER['SERVER_NAME']."/index.php");
 ?>
