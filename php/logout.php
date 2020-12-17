@@ -6,5 +6,5 @@
 
     $userSession->closeSession();
 
-    header("Location: http://".$_SERVER['SERVER_NAME']."/index.php");
+    header("Location: https://".$_SERVER['SERVER_NAME']."/index.php");
 ?>
